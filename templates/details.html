@@ -1,0 +1,62 @@
+{% include 'header.html' %}
+
+<body>
+
+    
+
+    <div class="container">
+
+    <div class="pull-right">
+    {% if user %}
+
+    Welcome {{ user }} | <a href="/logout">Logout</a> | <a href="/">Home</a>
+
+    {% else %}
+
+    <a href="/login">Login</a> | <a href="/">Home</a>
+
+    {% endif %}
+    </div>
+
+    <h3>Dessert Details</h3>
+
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+    {{ error }}
+    </div>
+    {% endif %}
+
+    <h4>{{ dessert.name }}</h4>
+
+    <p>Price: ${{ dessert.price }}</p>
+
+    <p>Calories: {{ dessert.calories }}</p>
+
+    <p>Calories per dollar: {{ dessert.calories_per_dollar() }}</p>
+
+    <a class="btn btn-primary" href="/edit/{{ dessert.id }}">Edit {{ dessert.name }}</a>
+
+    <!-- delete button toggles "Are you sure?" modal -->
+    <a class="btn btn-danger" href="#delete-modal" data-toggle="modal">Delete {{ dessert.name }}</a>
+
+    <!-- modal directs to Flask route for delete -->
+    <div id="delete-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <h4>Are you sure?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>If you delete this dessert, you won't be able to undo it.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="/delete/{{ dessert.id }}" class="btn btn-danger">Delete</a>
+                    <button type="button" class="btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>

@@ -1,9 +1,51 @@
-<h3>Dessert Menu</h3>
+{% include 'header.html' %}
 
-<ul>
-{% for dessert in desserts %}
-    <li>{{ dessert.name }} - ${{ dessert.price }}, {{ dessert.calories }} calories
-{% endfor %}
-</ul>
+<body>
 
-<a href="/add">Add Item</a>
+    <div class="container">
+
+    <div class="pull-right">
+    {% if user %}
+
+    Welcome {{ user }} | <a href="/logout">Logout</a> | <a href="/">Home</a>
+
+    {% else %}
+
+    <a href="/login">Login</a> | <a href="/">Home</a>
+
+    {% endif %}
+    </div>
+
+
+    <h3>Log In</h3>
+
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+    
+    {{ error }}
+
+    </div>
+    {% endif %}
+
+
+    <form action="/" method="POST" class="form-inline">
+
+    <div class="form-group">
+
+        <label for="username_id">Username</label>
+        <input  class="form-control" id="username_id" name="username_field" type="text" />
+
+    </div>
+
+    <div class="form-group">
+
+        <label for="password_id">Password</label>
+        <input  class="form-control" id="password_id" name="password_field" type="text" />
+
+    </div>
+
+    <input type="submit" value="Login" class="btn btn-success"/>
+
+</form>
+
+</body>

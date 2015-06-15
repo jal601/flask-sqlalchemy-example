@@ -16,25 +16,13 @@
     {% endif %}
     </div>
 
-    <h3>Add Dessert</h3>
+    <h3>Edit Dessert</h3>
 
-    {% if dessert %}
-
-    <!-- http://getbootstrap.com/components/#alerts -->
-
-    <div class="alert alert-success" role="alert">
-
-        <p><strong>{{dessert.name}}</strong> successfully created! Add another below.</p>
-        <p><a href="/menu">Back to Dessert List</a></p>
-
-    </div>
-
-    {% endif %}
 
     {% if error %}
     <div class="alert alert-danger" role="alert">
 
-    An error occurred trying to create your dessert:
+    An error occurred trying to edit your dessert:
 
     {{ error }}
 
@@ -45,33 +33,35 @@
     <!-- Bootstrap: http://getbootstrap.com/css/#forms -->
 
     <!-- The form action and method correspond to a Flask route -->
-    <form action="/add" method="POST" class="form-inline">
+    <form action="/edit/{{ dessert.id }}" method="POST" class="form-inline">
 
     <div class="form-group">
 
+        <!-- dessert names can't be edited (to avoid confusion) -->
+
         <label for="name_id">Name</label>
-        <input  class="form-control" id="name_id" name="name_field" type="text" />
+        <input  class="form-control" id="name_id" name="name_field" type="text" value="{{ dessert.name }}" disabled/>
 
     </div>
 
     <div class="form-group">
 
         <label for="price_id">Price</label>
-        <input class="form-control" id="price_id" name="price_field" type="text" size="4" />
+        <input class="form-control" id="price_id" name="price_field" type="text" size="4" value="{{ dessert.price }}"/>
 
     </div>
 
     <div class="form-group">
 
         <label for="cals_id">Calories</label>
-        <input class="form-control" id="cals_id" name="cals_field" type="text" size="4" />
+        <input class="form-control" id="cals_id" name="cals_field" type="text" size="4" value="{{ dessert.calories }}"/>
 
     </div>
 
 
 
     <!-- We need a submit button to submit a form! -->
-    <input type="submit" value="Add" class="btn btn-success"/>
+    <input type="submit" value="Edit" class="btn btn-success"/>
 
 
     </form>

@@ -1,0 +1,42 @@
+{% include 'header.html' %}
+
+<body>
+
+    <div class="container">
+
+
+    {% if user %}
+    <div class="pull-right">
+    Welcome {{ user }} | <a href="/logout">Logout</a> | <a href="/">Home</a>
+    </div>
+    <h3>{{ user }}'s Dessert Menu</h3>
+
+    {% else %}
+    <div class="pull-right">
+    <a href="/login">Login</a> | <a href="/">Home</a>
+    </div>
+    <h3>Dessert Menu</h3>
+
+    {% endif %}
+
+    {% if message %}
+    <div class="alert alert-info" role="alert">
+    
+    {{ message }}
+
+    </div>
+    {% endif %}
+
+
+    <ul>
+    {% for dessert in desserts %}
+        <li><a href="/desserts/{{ dessert.id }}">{{ dessert.name }}</a> - ${{ dessert.price }}, {{ dessert.calories }} calories</li>
+    {% endfor %}
+    </ul>
+
+    <a href="/add" class="btn btn-success">Add Item</a>
+
+
+    </div>
+
+</body>
